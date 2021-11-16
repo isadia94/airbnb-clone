@@ -1,6 +1,6 @@
 function Footer() {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <footer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  px-8 font-poppins sm:px-16">
       <div className="mb-4">
         <h4 className="font-poppins font-bold">About</h4>
         <p className="cursor-pointer hover:underline font-poppins text-sm mt-3">
@@ -47,7 +47,7 @@ function Footer() {
           Founders' Letter
         </p>
       </div>
-    </div>
+    </footer>
   );
 }
 

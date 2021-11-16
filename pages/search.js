@@ -2,9 +2,12 @@ import { useRouter } from "next/dist/client/router";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import { format } from "date-fns";
+import InfoCard from "../components/InfoCard";
+import Head from "next/head";
 
-function search() {
+function search({ searchResults }) {
   const router = useRouter();
+
   const { location, startDate, endDate, noOfGuests } = router.query;
 
   const formattedStartDate = format(new Date(startDate), "dd MMMM yy");
@@ -12,6 +15,16 @@ function search() {
   const range = `${formattedStartDate}- ${formattedEndDate}`;
   return (
     <div>
+      <Head>
+        <title className="font-poppins">Hotels</title>
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet"
+        ></link>
+      </Head>
       <Header
         placeholder={`${location} | ${range} | ${noOfGuests} ${
           noOfGuests == 1 ? "guest" : "guests"
@@ -33,6 +46,22 @@ function search() {
             <p className="button">Rooms and beds</p>
             <p className="button">More filters</p>
           </div>
+          <div className="flex flex-col">
+            {searchResults.map(
+              ({ img, location, title, description, star, price, total }) => (
+                <InfoCard
+                  key={img}
+                  img={img}
+                  location={location}
+                  title={title}
+                  description={description}
+                  star={star}
+                  price={price}
+                  total={total}
+                />
+              )
+            )}
+          </div>
         </section>
       </main>
       <Footer />
@@ -41,3 +70,15 @@ function search() {
 }
 
 export default search;
+
+export async function getServerSideProps() {
+  const searchResults = await fetch("https://links.papareact.com/isz").then(
+    (res) => res.json()
+  );
+
+  return {
+    props: {
+      searchResults,
+    },
+  };
+}
