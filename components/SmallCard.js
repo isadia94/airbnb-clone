@@ -7,8 +7,8 @@ function SmallCard({ img, location, distance }) {
         <Image src={img} layout="fill" className="rounded-lg" />
       </div>
       <div>
-        <h2>{location}</h2>
-        <h2>{distance}</h2>
+        <h2 className="font-poppins">{location}</h2>
+        <h2 className="font-poppins text-sm">{distance}</h2>
       </div>
     </div>
   );

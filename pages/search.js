@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import { format } from "date-fns";
 import InfoCard from "../components/InfoCard";
 import Head from "next/head";
+import Map from "../components/Map";
 
 function search({ searchResults }) {
   const router = useRouter();
@@ -62,6 +63,9 @@ function search({ searchResults }) {
               )
             )}
           </div>
+        </section>
+        <section className="hidden lg:inline-flex lg:min-w-[600px]">
+          <Map searchResults={searchResults} />
         </section>
       </main>
       <Footer />
